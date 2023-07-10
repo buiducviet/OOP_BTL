@@ -47,6 +47,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.awt.event.ActionEvent;
@@ -75,6 +76,9 @@ public class GUI7_3 extends JFrame {
 	private JScrollPane scrollPane_1;
 	private JLabel labelTimeLeft;
 	private double grade=0;
+	
+	
+    
 	public String getQuizName() {
 		return quizName;
 	}
@@ -624,9 +628,9 @@ public class GUI7_3 extends JFrame {
 				}
 //			
 				panelResult.getLabelMarks().setText(""+countCorrect+"/"+socauhoi);
-				String s = String.valueOf(grade/socauhoi);
-				s=s;
-				panelResult.getLabelGrade().setText(s.substring(0,4)+"%");
+				String s2= String.format("%.2f",grade/(socauhoi));
+				String s1 = String.format("%.2f",grade/(socauhoi*10));
+				panelResult.getLabelGrade().setText(s1+" out of 10.00"+" ("+s2 +"%"+")");
 			}else if(x==JOptionPane.CANCEL_OPTION){
 				GUI6_1 gui6_1= new GUI6_1(quizName);
 				gui6_1.setVisible(true);
@@ -816,9 +820,9 @@ public class GUI7_3 extends JFrame {
 				}
 
 				panelResult.getLabelMarks().setText(""+countCorrect+"/"+socauhoi);
-				String s1 = String.valueOf(grade/socauhoi);
-				s1=s1;
-				panelResult.getLabelGrade().setText(s1.substring(0,4)+"%");
+				String s2= String.format("%.2f",grade/(socauhoi));
+				String s1 = String.format("%.2f",grade/(socauhoi*10));
+				panelResult.getLabelGrade().setText(s1+" out of 10.00"+" ("+s2 +"%"+")");
 			}
 		}
 			
