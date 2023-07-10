@@ -170,7 +170,7 @@ public class FiledocxFormat {
         	
         	System.out.println(line);
         	line=sc.nextLine();
-        	if(q.get(0).equals(qs)) {
+        	if(q.get(0).equals(qs) && iconList.size()>1) {
         	   line=sc.nextLine();
         	}
         	demdong++;
@@ -204,27 +204,31 @@ public class FiledocxFormat {
         	}else {
         		Question ques= new Question(name, cauHoi, choices);
         		ques.setAnswer(answer);
-        		IconofQuestion iconOfQuestion = new IconofQuestion(ques);
-        		iconList.remove(iconList.size()-1);
-        		System.out.println(iconList.size());
-        		iconOfQuestion.setIconList(iconList);
-        		path.remove(path.size()-1);
-        		System.out.println(path.size());
-        		iconOfQuestion.setPath(path);
-        		try {
-					ArrayList<IconofQuestion> arrayListQues = new fileQuesIcon().docIconList();
-					arrayListQues.add(iconOfQuestion);
-					new fileQuesIcon().ghiIconList(arrayListQues);
-			} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-			} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-			}
-        		System.out.println(iconOfQuestion.getPath());
+        		if(iconList.size()>1) {
+        			IconofQuestion iconOfQuestion = new IconofQuestion(ques);
         		
+        			iconList.remove(iconList.size()-1);
+        			System.out.println(iconList.size());
+        			iconOfQuestion.setIconList(iconList);
+        			path.remove(path.size()-1);
+        			System.out.println(path.size());
+        			iconOfQuestion.setPath(path);
+        		
+        			try {
+        				ArrayList<IconofQuestion> arrayListQues = new fileQuesIcon().docIconList();
+        				arrayListQues.add(iconOfQuestion);
+        				new fileQuesIcon().ghiIconList(arrayListQues);
+        			} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+        				e1.printStackTrace();
+        			} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+        			}
+        			System.out.println(iconOfQuestion.getPath());
+        		}
         		ChoiceGrade choiceGrade = new ChoiceGrade(ques);
+        		
         		ArrayList<String> listChoiceGrade = new ArrayList();
         		System.out.println(101456);
         		System.out.println(choices.size());
@@ -284,7 +288,7 @@ public class FiledocxFormat {
         if(loi.equals("Error at: " )) {
         	if(!q.isEmpty()) {
         	System.out.println(167);
-        	JOptionPane.showMessageDialog(null, "Không có lỗi nào!");
+        	JOptionPane.showMessageDialog(null, "Success "+q.size());
         	}
         }else {
         	System.out.println(168);

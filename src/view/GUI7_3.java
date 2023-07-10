@@ -653,18 +653,64 @@ public class GUI7_3 extends JFrame {
 			panelResult.setVisible(true);
 			
 			
-			int timeSecond =60 - clockCountDown.getSeconds();
-			int timeMinute ;
-			if( timeSecond == 0) timeMinute = 60 - clockCountDown.getMinutes();
-			else 				 timeMinute = 60 - clockCountDown.getMinutes()-1;
-			int timeHour;
-			if(timeMinute == 0 && timeSecond == 0) timeHour = -  clockCountDown.getHours() + initialTimeHour;
-			else 				 timeHour = -  clockCountDown.getHours() + initialTimeHour-1;
+			try {
+				ArrayList<TimeLimitOfQuiz> arrayListQues = new fileTimeLimitQuiz().docTimeLimit();
+				System.out.println("abcd");
+				for(TimeLimitOfQuiz temp : arrayListQues) {
+					if (temp.getQuizName().equalsIgnoreCase(this.quizName)) {
+						if(temp.isHour()){
+							int timeSecond =60 - clockCountDown.getSeconds();
+							int timeMinute ;
+							if( timeSecond == 0) timeMinute = 60 - clockCountDown.getMinutes();
+							else if 	(  60 - clockCountDown.getMinutes()-1 < 0)  timeMinute = 0 ;
+							else  timeMinute = 60 - clockCountDown.getMinutes()-1;
+							
+							
+							
+							int timeHour;
+							
+							if(timeMinute == 0 && timeSecond == 0) timeHour = -  clockCountDown.getHours() + initialTimeHour;
+							else if			(  -  clockCountDown.getHours() + initialTimeHour-1 < 0)    timeHour=0;
+							else 	timeHour = -  clockCountDown.getHours() + initialTimeHour-1;
+							System.out.println(clockCountDown.getMinutes());
+							
+							
+							panelResult.getLabelTimeTaken().setText(String.valueOf(timeHour)+"h, "+String.valueOf(timeMinute)+"m, "+String.valueOf(timeSecond)+"s"); 
+						}				
+						else {
+							int timeSecond =60 - clockCountDown.getSeconds();
+							
+							
+							int timeMinute ;
+							if( timeSecond == 0) timeMinute = initialTimeMinutes - clockCountDown.getMinutes();
+							else if 	(  initialTimeMinutes - clockCountDown.getMinutes()-1 < 0)  timeMinute = 0 ;
+							else  timeMinute = initialTimeMinutes - clockCountDown.getMinutes()-1;
+							
+							
+							int timeHour=0;								
+							
+							System.out.println(clockCountDown.getMinutes());
+							
+							
+							panelResult.getLabelTimeTaken().setText(String.valueOf(timeHour)+"h, "+String.valueOf(timeMinute)+"m, "+String.valueOf(timeSecond)+"s"); 
+						}
+							
+					}
+					
+				}
+					
+			}
+			catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
-			System.out.println(clockCountDown.getMinutes());
-			
-			
-			panelResult.getLabelTimeTaken().setText(String.valueOf(timeHour)+"h, "+String.valueOf(timeMinute)+"m, "+String.valueOf(timeSecond)+"s, "); 
 			for(int k=1;k<=socauhoi;k++) {
 				if(!lambais[k].getQuestion().isMultiple()) {
 					

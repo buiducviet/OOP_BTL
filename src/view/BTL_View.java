@@ -113,7 +113,6 @@ public class BTL_View extends JFrame {
 	private JComboBox comboBox_SelectCate;
 	private JComboBox comboBoxParentCate;
 	private JCheckBox checkBox_All ;
-//	private DefaultListCellRenderer renderer;
 	public PopupMenu popupMenu  = new PopupMenu();
 	public File f;
 	public JList list;
